@@ -1,0 +1,11 @@
+/Camera.class
+/DirectionalLight.class
+/Material.class
+/Mesh.class
+/OBJLoader$Face.class
+/OBJLoader$IdxGroup.class
+/OBJLoader.class
+/PointLight$Attenuation.class
+/PointLight.class
+/ShaderProgram.class
+/Transformation.class

@@ -1,0 +1,81 @@
+<project name='PA4' basedir="." default="run">
+    <property name="author" value="Changxi Zheng" />
+
+    <property name="build.dir" value="${basedir}/build" />
+    <property name="lwjgl.dir" value="${basedir}/lwjgl" />
+    <property name="build.classdir" value="${build.dir}/classes" />
+    <property name="build.distdir" value="${build.dir}/dist" />
+
+    <property name="src.dir" value="${basedir}/src" />
+
+    <!-- EXECUTION TAGS -->
+    <property name="debug" value="false" />
+    <property name="verbose" value="false" />
+    <property name="arg0" value="src/resources/models/sphere.obj" />
+    <property name="arg1" value="0.5" />
+
+    <path id="class.path">
+        <fileset dir="${lwjgl.dir}">
+            <include name="**/*.jar"/>
+        </fileset>
+        <fileset dir="${basedir}/lib">
+            <include name="**/*.jar"/>
+        </fileset>
+        <pathelement path="${basedir}/src"/>
+    </path>
+    <!-- ========================================================================= -->   
+    <!--                                    Init                                   -->   
+    <!-- ========================================================================= -->   
+    <target name="init" description="Initialize ressources">                             
+       <mkdir dir="${build.classdir}"/>                                                   
+    </target> 
+
+    <!-- first create our properties -->
+    <condition property="isMac">
+        <os family="mac" />
+    </condition>
+
+    <condition property="isWindows">
+        <os family="windows" />
+    </condition>
+
+    <condition property="isUnix">
+        <and>
+            <os family="unix" />
+            <not>
+                <os family="mac" />
+            </not>
+        </and>
+    </condition>
+    
+    <!--
+    <condition property="register-size" value="64" else="32">
+        <isset property="x64"/>
+    </condition>
+    -->
+
+    <!-- ========================================================================= -->   
+    <!--                               Build Scheduler                             -->   
+    <!-- ========================================================================= -->   
+    <target name="build.pa4" depends="init">
+        <javac srcdir="${src.dir}" destdir="${build.classdir}" debug="${debug}"
+        	debuglevel="lines,vars,source" optimize="on" verbose="${verbose}" 
+        	includeantruntime="false">
+            <classpath refid="class.path" />
+        </javac>
+    </target>
+
+    <target name="run" depends="build.pa4">
+        <java classname="c2g2.game.Main" fork="true">
+            <classpath>
+                <path refid="class.path"/>
+                <pathelement path="${build.classdir}"/>
+            </classpath>
+            <arg value="${arg0}"/>
+            <arg value="${arg1}"/>
+            <jvmarg value="-XstartOnFirstThread"/>
+        	<jvmarg value="-Xdebug"/>
+        </java>
+    </target>
+
+</project>

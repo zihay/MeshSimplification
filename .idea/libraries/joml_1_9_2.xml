@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="joml-1.9.2">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/joml-1.9.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/pngj-2.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
